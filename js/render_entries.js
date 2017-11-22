@@ -202,8 +202,7 @@ function _render_tests_table(uid, tests, earlier_tests_map) {
 
     if (can_compare_current) {
       var compared = false;
-      for (var key in earlier_tests_map) {
-        var earlier_test = earlier_tests_map[key];
+      for (earlier_test in earlier_tests_map) {
         if (earlier_test.name == test.name
             && earlier_test.result == "pass"
             && earlier_test.hasOwnProperty("memory")
