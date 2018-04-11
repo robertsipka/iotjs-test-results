@@ -194,3 +194,19 @@ All the results are written into JSON files that are found in a `results` folder
 ```
 
 Every JSON file contain information about the test results (status, output, memory usage), environments (used hashes, commit messages) and the main section sizes of the application (iotjs or jerryscript) binary.
+
+### Run iotjs tests with coverage measurement on Artik053
+
+You can able to run coverage measurement on Artik053. It uses the jerry-debugger to calculate the covered JS source lines, so needs to specify a unique network address for the connection with the `coverage` option. Artik053 use wifi for the communication, so also needs to set the following enviroment variables:
+
+```
+export ARTIK_COV_WIFI_NAME=your_wifi_name
+export ARTIK_COV_WIFI_PWD=your_wifi_password
+```
+
+To run tests with coverage:
+
+```
+$python driver.py --device artik053 --app iotjs --device-id /dev/ARTIK053 --baud 115200 --coverage=DEVICE_IP:_DEVICE_PORT
+
+ +```
