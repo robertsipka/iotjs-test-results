@@ -159,7 +159,16 @@ def run_iotjs(options):
     # The test_module_dynamicload.js file requires to define the dynamic module test path.
     os.environ['IOTJS_PATH'] = os.path.join(REMOTE_TESTRUNNER_PATH, 'test')
     # 1. Run IoT.js without Freya to get its output and exit value.
-    output, exitcode = execute(options.cwd, options.cmd, ['--mem-stats', options.testfile])
+
+    args = ['--mem-stats']
+
+    if options.coverage_port:
+        args.append('--start-debug-server')
+        args.append('--debug-port')
+        args.append('%s' % options.coverage_port)
+
+    args.append(options.testfile)
+    output, exitcode = execute(options.cwd, options.cmd, args)
 
     jerry_peak_alloc = 'n/a'
     stack_peak = 'n/a'
@@ -218,6 +227,10 @@ def parse_arguments():
 
     parser.add_argument('--testfile', metavar='file',
                         help='Test file with path')
+
+    parser.add_argument('--coverage-port',
+                        metavar='PORT',
+                        help='Specify the PORT for jerry-debugger to calculate the JS source code coverage')
 
     return parser.parse_args()
 
