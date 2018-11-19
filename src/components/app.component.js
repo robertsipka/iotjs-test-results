@@ -25,7 +25,6 @@ import Device from './device/device.container';
 export default class App extends React.Component {
   render() {
     const { match } = this.props;
-
     return (
       <div className="wrapper">
         <Header {...this.props} />
